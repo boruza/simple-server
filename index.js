@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const multer = require("multer");
 const path = require("path"); // Import path module early
