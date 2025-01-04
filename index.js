@@ -304,7 +304,12 @@ app.get("/api/rooms", (req, res) => {
 });
 
 app.post("/api/reserve", (req, res) => {
+console.log(req.session); // Debug log
   const { roomId, checkInDate, checkOutDate } = req.body;
+
+if (!req.session.user) {
+    return res.status(401).send("User not logged in");
+  }
 
   const userId = req.session.user.id; // Retrieve user ID from the session
 
