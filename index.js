@@ -6,6 +6,10 @@ const session = require("express-session");
 const multer = require("multer");
 const path = require("path"); // Import path module early
 const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
+const cors = require('cors');
+
+// Enable CORS for all origins
+app.use(cors());
 
 const app = express();
 app.use(bodyParser.json());
