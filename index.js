@@ -51,10 +51,14 @@ if (!fs.existsSync(uploadDirectory)) {
 // Session middleware
 app.use(
   session({
-    secret: "gfjhdblkgfgcct76598hgdytrgvnjgf509862mvvhjhgf",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }, // Set to true if using HTTPS
+    secret: "gfjhdblkgfgcct76598hgdytrgvnjgf509862mvvhjhgf", // Use a strong, unique secret
+    resave: false, // Avoid resaving session if it hasn't been modified
+    saveUninitialized: false, // Do not save uninitialized sessions to reduce storage usage
+    cookie: {
+      secure: process.env.NODE_ENV === 'production', // Ensure cookies are only sent over HTTPS in production
+      httpOnly: true, // Helps protect against XSS by restricting client-side JS access to cookies
+      maxAge: 1000 * 60 * 60 * 24, // Set cookie expiration time (e.g., 1 day)
+    },
   })
 );
 
