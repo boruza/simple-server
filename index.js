@@ -13,6 +13,13 @@ const app = express();
 // Enable CORS for all origins
 app.use(cors());
 
+app.use(
+  cors({
+    origin: '*', // Allow all origins temporarily for testing
+    credentials: true, // Allow cookies and session headers
+  })
+);
+
 // Middleware setup
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
