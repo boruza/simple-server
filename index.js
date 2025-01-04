@@ -6,7 +6,7 @@ const session = require("express-session");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-
+const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
 // Initialize the app
 const app = express();
 
