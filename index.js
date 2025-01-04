@@ -4,23 +4,18 @@ const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const multer = require("multer");
-const path = require("path"); // Import path module early
-const cors = require('cors');
-const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
+const path = require("path");
+const cors = require("cors");
 
-
-// Enable CORS for all origins
-app.use(cors());
-
+// Initialize the app
 const app = express();
+
 // Enable CORS for all origins
 app.use(cors());
+
+// Middleware setup
 app.use(bodyParser.json());
-
-// Serve static files from the current directory
 app.use(express.static(__dirname));
-
-// Serve static files from the 'host' directory
 app.use(express.static("public"));
 
 // Configure Multer to handle file uploads
