@@ -47,7 +47,7 @@ app.use(
     secret: "gfjhdblkgfgcct76598hgdytrgvnjgf509862mvvhjhgf",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }, // Set to true if using HTTPS
+    cookie: { secure: false }, // Set to true if using HTTPS
   })
 );
 
