@@ -251,13 +251,14 @@ app.get("/api/rooms", (req, res) => {
 });
 
 // Reserve a room
-app.post("/api/reserve", (req, res) => {
+app.post("/api/reserve", authenticate, (req, res) => {
   const { roomId, checkInDate, checkOutDate, userId } = req.body;
-
+ console.log("Reserve request body:", req.body); // Debug: Log the body of the reservation request
   if (!userId) {
     return res.status(401).json({ message: "User ID is required" });
   }
 
+console.log("User ID from request:", userId); // Debug: Log the user ID from the request
   const checkAvailabilitySql = `
         SELECT * FROM reservations
         WHERE room_id = ? 
@@ -313,6 +314,7 @@ app.post("/api/reserve", (req, res) => {
                 if (err) {
                   console.error("Error updating room availability:", err);
                 }
+console.log("Reservation successful with ID:", result.insertId); // Debug: Log reservation success
 
                 res.status(200).json({
                   message: "Reservation successful!",
