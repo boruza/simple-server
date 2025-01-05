@@ -15,8 +15,7 @@ const port = process.env.PORT || 3000; // Use environment variable PORT or defau
 // Initialize the app
 const app = express();
 
-// Enable CORS for all origins
-app.use(cors());
+
 
 app.use(
   cors({
@@ -31,6 +30,8 @@ app.use(
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 app.use(express.static("public"));
+
+
 
 // Configure Multer to handle file uploads
 const storage = multer.diskStorage({
