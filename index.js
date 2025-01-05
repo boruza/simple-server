@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { generateToken } = require("./jwtUtils");
+
 const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
 
 // Initialize the app
