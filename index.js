@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const { authenticate } = require("./jwtUtils");
 
 const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
 
@@ -21,27 +22,6 @@ app.use(
   })
 );
 
-const { verifyToken } = require("./jwtUtils");
-
-const authenticate = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Unauthorized: Token is required" });
-  }
-
-  const token = authHeader.split(" ")[1];
-  const userData = verifyToken(token);
-
-  if (!userData) {
-    return res.status(401).json({ message: "Unauthorized: Invalid token" });
-  }
-
-  req.user = userData; // Attach user data to the request object
-  next();
-};
-
-module.exports = { authenticate };
 
 
 // Middleware setup
