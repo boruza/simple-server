@@ -83,7 +83,7 @@ app.get("/booking-history", (req, res) => {
   res.sendFile(__dirname + "/booking-history.html");
 });
 
-const { authenticate } = require("./jwtUtils");
+
 
 app.get("/api/booking-history", authenticate, (req, res) => {
   const { id: userId } = req.user; // Get user ID from decoded token
