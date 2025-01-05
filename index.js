@@ -19,17 +19,18 @@ const app = express();
 
 
 
-// Configure CORS middleware
+
+
 app.use(
   cors({
-    origin: 'http://127.0.0.1:8080', // Replace with your frontend's origin
+    origin: '*', // Allow all origins temporarily for testing
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow the Authorization header
-    credentials: true, // Allow cookies if necessary
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: false, // Set to true if you need cookies/credentials
   })
 );
 
-// Explicitly handle preflight requests
+// Ensure the server explicitly handles OPTIONS requests
 app.options('*', cors());
 
 
