@@ -4,37 +4,31 @@ const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
-const cors = require("cors");
 const { generateToken } = require('./jwtUtils');  // Adjust the path if necessary
 const { authenticate } = require('./jwtUtils');  // Adjust the path if necessary
-
-
 
 const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
 
 // Initialize the app
 const app = express();
 
+// Completely disable CORS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
-
-
-
-
-
-app.use(
-  cors({
-    origin: '*', // Allow all origins temporarily for testing
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    credentials: false, // Set to true if you need cookies/credentials
-  })
-);
-
-// Ensure the server explicitly handles OPTIONS requests
-app.options('*', cors());
-
-
-
+// Handle preflight requests
+app.options("*", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.status(204).end(); // Respond with no content
+});
 
 // Middleware setup
 app.use(bodyParser.json());
