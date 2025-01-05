@@ -370,6 +370,15 @@ app.post("/admin/login", (req, res) => {
   });
 });
 
+app.post("/api/logout", (req, res) => {
+    // Since JWT is stateless, the logout just requires clearing the JWT from the client
+    res.status(200).json({
+        success: true,
+        message: "Successfully logged out",
+    });
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
