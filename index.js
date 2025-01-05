@@ -6,6 +6,8 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const { generateToken } = require('./jwtUtils');  // Adjust the path if necessary
+const { authenticate } = require('./jwtUtils');  // Adjust the path if necessary
+
 
 
 const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
