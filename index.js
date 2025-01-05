@@ -16,7 +16,7 @@ app.use(cors());
 app.use(
   cors({
     origin: '*', // Allow all origins temporarily for testing
-    credentials: true, // Allow cookies and session headers
+    credentials: false, // Allow cookies and session headers
   })
 );
 
@@ -56,7 +56,7 @@ app.use(
     saveUninitialized: false, // Do not save uninitialized sessions to reduce storage usage
     cookie: {
       secure: process.env.NODE_ENV === 'production', // Ensure cookies are only sent over HTTPS in production
-      httpOnly: true, // Helps protect against XSS by restricting client-side JS access to cookies
+      httpOnly: false, // Helps protect against XSS by restricting client-side JS access to cookies
       maxAge: 1000 * 60 * 60 * 24, // Set cookie expiration time (e.g., 1 day)
     },
   })
