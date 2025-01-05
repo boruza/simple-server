@@ -17,12 +17,21 @@ const app = express();
 
 
 
+
+
+// Configure CORS middleware
 app.use(
   cors({
-    origin: '*', // Allow all origins temporarily for testing
-    credentials: false,
+    origin: 'http://127.0.0.1:8080', // Replace with your frontend's origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow the Authorization header
+    credentials: true, // Allow cookies if necessary
   })
 );
+
+// Explicitly handle preflight requests
+app.options('*', cors());
+
 
 
 
