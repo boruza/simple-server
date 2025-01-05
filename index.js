@@ -31,7 +31,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 app.use(express.static("public"));
 
-
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Configure Multer to handle file uploads
 const storage = multer.diskStorage({
