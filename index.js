@@ -107,12 +107,17 @@ app.get("/api/booking-history", authenticate, (req, res) => {
 
     const response = {
       fullName: results[0]?.full_name || "",
-      bookings: results.map(({ full_name, ...booking }) => booking),
+      bookings: results.map(({ full_name, total_price, ...booking }) => {
+        // Ensure total_price is a valid number
+        const validTotalPrice = isNaN(total_price) ? 0 : parseFloat(total_price);
+        return { ...booking, total_price: validTotalPrice };
+      }),
     };
 
     res.status(200).json(response);
   });
 });
+
 
 
 // Registration endpoint
