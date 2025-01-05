@@ -5,7 +5,8 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { authenticate } = require("./jwtUtils");
+const { generateToken } = require('./jwtUtils');  // Adjust the path if necessary
+
 
 const port = process.env.PORT || 3000; // Use environment variable PORT or default to 3000
 
@@ -140,6 +141,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Login endpoint
+// Login endpoint
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -180,6 +182,7 @@ app.post("/login", (req, res) => {
     }
   });
 });
+
 
 // Add a new room
 app.post("/api/add-room", upload.single("roomImage"), (req, res) => {
